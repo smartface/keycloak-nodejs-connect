@@ -131,6 +131,12 @@ Config.prototype.configure = function configure (config) {
   this.realmUrl = this.authServerUrl + '/realms/' + this.realm
 
   /**
+   * List of issuers.
+   * @type {String[]}
+   */
+   this.issuers = (config['issuers'] || []).concat([this.realmUrl]);
+
+  /**
    * Root realm admin URL.
    * @type {String} */
   this.realmAdminUrl = this.authServerUrl + '/admin/realms/' + this.realm
