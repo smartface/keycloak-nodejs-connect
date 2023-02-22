@@ -34,6 +34,7 @@ const Rotation = require('./rotation')
 function GrantManager (config) {
   this.realmUrl = config.realmUrl
   this.issuers = config.issuers
+  this.forwardedHeaders = config.forwardedHeaders;
   this.clientId = config.clientId
   this.secret = config.secret
   this.publicKey = config.publicKey
@@ -292,7 +293,8 @@ GrantManager.prototype.userInfo = function userInfo (token, callback) {
   options.headers = {
     Authorization: 'Bearer ' + t,
     Accept: 'application/json',
-    'X-Client': 'keycloak-nodejs-connect'
+    'X-Client': 'keycloak-nodejs-connect',
+    ...this.forwardedHeaders
   }
 
   const promise = new Promise((resolve, reject) => {
@@ -505,7 +507,8 @@ const postOptions = (manager, path) => {
   const opts = URL.parse(manager.realmUrl + realPath); // eslint-disable-line
   opts.headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'X-Client': 'keycloak-nodejs-connect'
+    'X-Client': 'keycloak-nodejs-connect',
+    ...manager.forwardedHeaders
   }
   if (!manager.public) {
     opts.headers.Authorization = 'Basic ' + Buffer.from(manager.clientId + ':' + manager.secret).toString('base64')

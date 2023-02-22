@@ -137,6 +137,12 @@ Config.prototype.configure = function configure (config) {
    this.issuers = (config['issuers'] || []).concat([this.realmUrl]);
 
   /**
+   * X-Forwarded-Headers for keycloak requests.
+   * @type {Record<string, string | number>}
+   */
+  this.forwardedHeaders = (config["forwardedHeaders"] || {});
+
+  /**
    * Root realm admin URL.
    * @type {String} */
   this.realmAdminUrl = this.authServerUrl + '/admin/realms/' + this.realm

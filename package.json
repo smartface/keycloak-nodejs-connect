@@ -1,6 +1,6 @@
 {
-  "name": "keycloak-connect",
-  "version": "20.0.4",
+  "name": "@smartface/keycloak-connect",
+  "version": "20.0.5",
   "description": "Keycloak Connect Middleware",
   "homepage": "http://keycloak.org",
   "main": "keycloak.js",
